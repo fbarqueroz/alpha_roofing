@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, createContext, useContext } from "react";
+import { useState, useEffect, useRef, createContext, useContext } from "react";
+import type { ReactNode, ChangeEvent, FormEvent } from "react";
 import {
   Phone,
   MessageCircle,
-  Mail,
   Menu,
   X,
   ChevronRight,
@@ -47,8 +47,60 @@ const BRAND = {
   area: "Central Illinois",
 };
 
+/* ---------------------------- TYPES ---------------------------- */
+type Lang = "en" | "es";
+
+interface ServiceItem {
+  title: string;
+  desc: string;
+  points: string[];
+}
+
+interface Reason {
+  title: string;
+  desc: string;
+}
+
+interface ProcessStep {
+  n: string;
+  title: string;
+  desc: string;
+}
+
+interface CopyShape {
+  nav: { services: string; why: string; process: string; area: string; contact: string; cta: string };
+  hero: { badge: string; title1: string; title2: string; sub: string; call: string; whatsapp: string; license: string };
+  trust: string[];
+  services: { eyebrow: string; title: string; sub: string; items: ServiceItem[] };
+  why: { eyebrow: string; title: string; body: string; cta: string; reasons: Reason[] };
+  process: { eyebrow: string; title: string; steps: ProcessStep[] };
+  area: { eyebrow: string; title: string; body: string };
+  contact: {
+    eyebrow: string;
+    title: string;
+    sub: string;
+    form: {
+      name: string;
+      namePh: string;
+      phone: string;
+      phonePh: string;
+      email: string;
+      emailPh: string;
+      service: string;
+      serviceOpts: string[];
+      message: string;
+      messagePh: string;
+      send: string;
+      sending: string;
+      sent: string;
+      error: string;
+    };
+  };
+  footer: { rights: string; tagline: string };
+}
+
 /* ---------------------------- TRANSLATIONS ---------------------------- */
-const COPY = {
+const COPY: Record<Lang, CopyShape> = {
   en: {
     nav: { services: "Services", why: "Why Alpha", process: "Process", area: "Service Area", contact: "Contact", cta: "Free Estimate" },
     hero: {
@@ -227,17 +279,24 @@ const COPY = {
 };
 
 /* ---------------------------- LANGUAGE CONTEXT ---------------------------- */
-const LangContext = createContext(null);
+interface LangContextValue {
+  lang: Lang;
+  t: CopyShape;
+  toggle: () => void;
+}
+
+const defaultLangValue: LangContextValue = { lang: "en", t: COPY.en, toggle: () => {} };
+const LangContext = createContext<LangContextValue>(defaultLangValue);
 const useLang = () => useContext(LangContext);
 
-function detectDeviceLang() {
+function detectDeviceLang(): Lang {
   if (typeof navigator === "undefined") return "en";
   const raw = navigator.language || (navigator.languages && navigator.languages[0]) || "en";
   return raw.toLowerCase().startsWith("es") ? "es" : "en";
 }
 
-function LangProvider({ children }) {
-  const [lang, setLang] = useState("en");
+function LangProvider({ children }: { children: ReactNode }) {
+  const [lang, setLang] = useState<Lang>("en");
 
   useEffect(() => {
     setLang(detectDeviceLang());
@@ -249,7 +308,7 @@ function LangProvider({ children }) {
 }
 
 /* ---------- Reusable roofline mark (matches the card's "A") ---------- */
-function RooflineMark({ size = 40 }) {
+function RooflineMark({ size = 40 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" fill="none" aria-hidden="true">
       <defs>
@@ -284,7 +343,7 @@ function RooflineMark({ size = 40 }) {
 }
 
 /* ---------- Signature section divider: repeating roofline skyline ---------- */
-function RoofDivider({ flip = false, className = "" }) {
+function RoofDivider({ flip = false, className = "" }: { flip?: boolean; className?: string }) {
   let path = "M0,20 ";
   for (let i = 0; i < 10; i++) {
     const offset = i * 32;
@@ -307,8 +366,14 @@ function RoofDivider({ flip = false, className = "" }) {
 }
 
 /* ---------- Reveal-on-scroll wrapper ---------- */
-function Reveal({ children, delay = 0, className = "" }) {
-  const ref = useRef(null);
+interface RevealProps {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}
+
+function Reveal({ children, delay = 0, className = "" }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -356,7 +421,7 @@ function Nav() {
     { label: t.nav.contact, href: "#contact" },
   ];
 
-  const go = (href) => {
+  const go = (href: string) => {
     setOpen(false);
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -616,20 +681,31 @@ function Area() {
 }
 
 /* ---------------------------- CONTACT ---------------------------- */
+interface FormState {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
+}
+
+type Status = "idle" | "sending" | "sent" | "error";
+
 function Contact() {
   const { t } = useLang();
   const f = t.contact.form;
-  const [form, setForm] = useState({ name: "", phone: "", email: "", service: f.serviceOpts[0], message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [form, setForm] = useState<FormState>({ name: "", phone: "", email: "", service: f.serviceOpts[0], message: "" });
+  const [status, setStatus] = useState<Status>("idle");
 
   useEffect(() => {
     setForm((prev) => ({ ...prev, service: f.serviceOpts[0] }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [t]);
 
-  const update = (k) => (e) => setForm((s) => ({ ...s, [k]: e.target.value }));
+  const update = (k: keyof FormState) => (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setForm((s) => ({ ...s, [k]: e.target.value }));
 
-  const submit = async (e) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
     try {
@@ -648,8 +724,7 @@ function Contact() {
       if (!res.ok) throw new Error("bad response");
       setStatus("sent");
       setForm({ name: "", phone: "", email: "", service: f.serviceOpts[0], message: "" });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch {
       setStatus("error");
     }
   };
