@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, createContext, useContext } from "react";
 import type { ReactNode, ChangeEvent, FormEvent } from "react";
 import {
   Phone,
-  MessageCircle,
   Menu,
   X,
   ChevronRight,

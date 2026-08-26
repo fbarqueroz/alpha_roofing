@@ -1,0 +1,37 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c1c1c"/>
+      <stop offset="1" stop-color="#0e0e0e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="4" y1="6" x2="60" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f0d9a6"/>
+      <stop offset="0.5" stop-color="#caa056"/>
+      <stop offset="1" stop-color="#8f6a2e"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#bg)"/>
+
+  <path
+    d="M8 33 L32 10 L56 33 M8 33 L18 33 M56 33 L46 33"
+    stroke="url(#gold)"
+    stroke-width="6"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+    fill="none"
+  />
+  <path
+    d="M13 49 L32 30 L51 49 M13 49 L21 49 M51 49 L43 49"
+    stroke="url(#gold)"
+    stroke-width="6"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+    fill="none"
+  />
+
+  <rect x="28.5" y="37" width="3.2" height="3.2" fill="#caa056"/>
+  <rect x="32.3" y="37" width="3.2" height="3.2" fill="#caa056"/>
+  <rect x="28.5" y="40.8" width="3.2" height="3.2" fill="#caa056" opacity="0.75"/>
+  <rect x="32.3" y="40.8" width="3.2" height="3.2" fill="#caa056" opacity="0.75"/>
+</svg>
