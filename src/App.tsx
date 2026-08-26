@@ -69,7 +69,7 @@ interface ProcessStep {
 
 interface CopyShape {
   nav: { services: string; why: string; process: string; area: string; contact: string; cta: string };
-  hero: { badge: string; title1: string; title2: string; sub: string; call: string; whatsapp: string; license: string };
+  hero: { badge: string; title1: string; title2: string; sub: string; license: string };
   trust: string[];
   services: { eyebrow: string; title: string; sub: string; items: ServiceItem[] };
   why: { eyebrow: string; title: string; body: string; cta: string; reasons: Reason[] };
@@ -108,8 +108,6 @@ const COPY: Record<Lang, CopyShape> = {
       title1: "Roofs, Gutters & Siding",
       title2: "Built to Outlast the Storm",
       sub: `${BRAND.name} is a licensed Central Illinois contractor run by owner ${BRAND.owner}. Straightforward advice, careful installs, and a free, no-pressure estimate before anything is decided.`,
-      call: `Call ${BRAND.name.split(" ")[0]}`,
-      whatsapp: "WhatsApp",
       license: `License No. ${BRAND.license1} · ${BRAND.license2}`,
     },
     trust: ["Licensed Contractor", "Free Estimates", "Owner On Every Job", "Roofing · Gutters · Siding"],
@@ -144,14 +142,12 @@ const COPY: Record<Lang, CopyShape> = {
         { title: "You talk to the owner", desc: `${BRAND.owner} runs the estimates and stands behind the work — not a call center passing you between departments.` },
         { title: "Estimates cost nothing", desc: "We walk the roof, explain what we see in plain language, and give you a written estimate with no obligation." },
         { title: "Licensed & accountable", desc: `Operating under license No. ${BRAND.license1} and ${BRAND.license2} in the state of Illinois.` },
-        { title: "Easy to reach", desc: "Call, text, WhatsApp or email — whichever is easiest for you, we answer it the same way." },
       ],
     },
     process: {
       eyebrow: "How It Works",
       title: "From First Call to Finished Roof",
       steps: [
-        { n: "01", title: "Reach out", desc: "Call, text, WhatsApp or send the form below with a few details about your roof." },
         { n: "02", title: "Free inspection", desc: "We come look in person and walk you through exactly what we find." },
         { n: "03", title: "Clear estimate", desc: "You get a written estimate with no pressure to sign anything on the spot." },
         { n: "04", title: "The work gets done", desc: "Once you approve, we schedule the crew and keep you posted until it's finished." },
@@ -196,8 +192,6 @@ const COPY: Record<Lang, CopyShape> = {
       title1: "Techos, Canales y Siding",
       title2: "Hechos Para Aguantar la Tormenta",
       sub: `${BRAND.name} es un contratista con licencia en Central Illinois, dirigido por el dueño ${BRAND.owner}. Consejos claros, instalaciones cuidadosas y un estimado gratis, sin presión, antes de decidir nada.`,
-      call: `Llamar a ${BRAND.name.split(" ")[0]}`,
-      whatsapp: "WhatsApp",
       license: `Licencia No. ${BRAND.license1} · ${BRAND.license2}`,
     },
     trust: ["Contratista con Licencia", "Estimados Gratis", "El Dueño en Cada Obra", "Techos · Canales · Siding"],
@@ -232,7 +226,6 @@ const COPY: Record<Lang, CopyShape> = {
         { title: "Hablas directo con el dueño", desc: `${BRAND.owner} maneja los estimados y respalda el trabajo — no es un call center que te pasa de departamento en departamento.` },
         { title: "Los estimados no cuestan nada", desc: "Revisamos el techo, te explicamos lo que vemos en palabras simples y te damos un estimado por escrito sin compromiso." },
         { title: "Con licencia y responsables", desc: `Operamos bajo la licencia No. ${BRAND.license1} y ${BRAND.license2} en el estado de Illinois.` },
-        { title: "Fácil de contactar", desc: "Llama, envía un mensaje, WhatsApp o correo — lo que sea más fácil para ti, respondemos igual." },
       ],
     },
     process: {
@@ -510,17 +503,6 @@ function Hero() {
         </Reveal>
         <Reveal delay={240}>
           <div className="hero__actions">
-            <a className="btn btn--gold btn--lg" href={`tel:${BRAND.phoneHref}`}>
-              <Phone size={18} /> {t.hero.call}
-            </a>
-            <a
-              className="btn btn--ghost btn--lg"
-              href={`https://wa.me/${BRAND.phoneHref.replace("+", "")}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <MessageCircle size={18} /> {t.hero.whatsapp}
-            </a>
           </div>
         </Reveal>
         <Reveal delay={320}>
