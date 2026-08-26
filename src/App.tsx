@@ -175,7 +175,7 @@ const COPY: Record<Lang, CopyShape> = {
         send: "Send Request",
         sending: "Sending...",
         sent: "Thanks — your request is on its way. We'll be in touch shortly.",
-        error: `Something went wrong sending the form. Please call or WhatsApp us instead — ${BRAND.phone}.`,
+        error: `Something went wrong sending the form.`,
       },
     },
     footer: {
@@ -231,7 +231,6 @@ const COPY: Record<Lang, CopyShape> = {
       eyebrow: "Cómo Funciona",
       title: "Desde la Primera Llamada Hasta el Techo Terminado",
       steps: [
-        { n: "01", title: "Contáctanos", desc: "Llama, envía un mensaje, WhatsApp o manda el formulario de abajo con algunos detalles de tu techo." },
         { n: "02", title: "Inspección gratis", desc: "Vamos en persona y te explicamos exactamente lo que encontramos." },
         { n: "03", title: "Estimado claro", desc: "Recibes un estimado por escrito, sin presión de firmar nada en el momento." },
         { n: "04", title: "Se hace el trabajo", desc: "Una vez que apruebas, programamos al equipo y te mantenemos al tanto hasta terminar." },
@@ -260,7 +259,7 @@ const COPY: Record<Lang, CopyShape> = {
         send: "Enviar Solicitud",
         sending: "Enviando...",
         sent: "Gracias — tu solicitud va en camino. Nos pondremos en contacto pronto.",
-        error: `Algo salió mal al enviar el formulario. Llámanos o escríbenos por WhatsApp — ${BRAND.phone}.`,
+        error: `Algo salió mal al enviar el formulario.`,
       },
     },
     footer: {
