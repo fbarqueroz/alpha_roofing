@@ -145,7 +145,7 @@ export function buildLeadEmail(lead: Lead, emailLang: Lang, now = new Date()) {
       <!-- Pie -->
       <tr><td style="background:#faf7f1;border-top:1px solid #ece6da;padding:18px 32px;font:12px/1.5 Arial,Helvetica,sans-serif;color:#8a7f6e;">
         ${c.footer}<br>
-        <strong style="color:#5d554a;">${esc(BRAND.name)}</strong> · ${esc(BRAND.phone)} · Lic. ${BRAND.license1} · ${BRAND.license2}
+        <strong style="color:#5d554a;">${esc(BRAND.name)}</strong> · Lic. ${BRAND.license1} · ${BRAND.license2}
       </td></tr>
 
     </table>
@@ -168,7 +168,7 @@ export function buildLeadEmail(lead: Lead, emailLang: Lang, now = new Date()) {
     lead.message.trim() || c.noMessage,
     "",
     "—",
-    `${BRAND.name} · ${BRAND.phone}`,
+    BRAND.name,
   ].join("\n");
 
   return { subject: c.subject(lead), html, text };

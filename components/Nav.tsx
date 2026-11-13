@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
-import { Menu, Phone, X } from "lucide-react";
-import { BRAND } from "@/lib/content";
+import { Menu, X } from "lucide-react";
 import { useLang } from "./LangProvider";
 import { RooflineMark } from "./Brand";
 import { LangSwitch } from "./LangSwitch";
@@ -107,10 +106,6 @@ export function Nav() {
 
         <div className="nav__cta">
           <LangSwitch id="desk" />
-          <a className="nav__phone" href={`tel:${BRAND.phoneHref}`}>
-            <Phone size={15} strokeWidth={2.25} />
-            {BRAND.phone}
-          </a>
           <button className="btn btn--gold btn--sm" onClick={() => go("#contact")}>
             {t.nav.cta}
           </button>
@@ -161,9 +156,6 @@ export function Nav() {
                 </motion.button>
               ))}
               <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="nav__mobilefoot">
-                <a className="nav__phone" href={`tel:${BRAND.phoneHref}`}>
-                  <Phone size={15} /> {BRAND.phone}
-                </a>
                 <button className="btn btn--gold" onClick={() => go("#contact")}>
                   {t.nav.cta}
                 </button>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { ChangeEvent, FormEvent, ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { AlertCircle, CheckCircle2, Loader2, Mail, Phone, Send } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2, Mail, Send } from "lucide-react";
 import { BRAND } from "@/lib/content";
 import { useLang } from "./LangProvider";
 import { EASE, Reveal, SplitWords } from "./Motion";
@@ -77,40 +77,29 @@ export function Contact() {
           <h3 className="contact__asidetitle">{a.title}</h3>
           <p className="contact__asidesub">{a.sub}</p>
 
-          <a className="contact__primary" href={`tel:${BRAND.phoneHref}`}>
+          <ul className="contact__owners">
+            {BRAND.owners.map((name) => (
+              <li key={name}>
+                <span className="contact__avatar" aria-hidden="true">
+                  {name.split(" ").map((w) => w[0]).join("")}
+                </span>
+                <span>
+                  <strong>{name}</strong>
+                  <small>{a.owners}</small>
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <a className="contact__primary" href={`mailto:${BRAND.email}`}>
             <span className="contact__icon">
-              <Phone size={18} />
+              <Mail size={18} />
             </span>
             <span>
-              <small>
-                {BRAND.owner} · {a.owner}
-              </small>
-              <strong>{BRAND.phone}</strong>
+              <small>{a.email}</small>
+              <strong>{BRAND.email}</strong>
             </span>
           </a>
-
-          <ul className="contact__list">
-            <li>
-              <a href={`tel:${BRAND.repPhoneHref}`}>
-                <Phone size={15} />
-                <span>
-                  <small>
-                    {BRAND.rep} · {a.rep}
-                  </small>
-                  {BRAND.repPhone}
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${BRAND.email}`}>
-                <Mail size={15} />
-                <span>
-                  <small>{a.email}</small>
-                  {BRAND.email}
-                </span>
-              </a>
-            </li>
-          </ul>
 
           <ul className="contact__points">
             {a.points.map((p) => (

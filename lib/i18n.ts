@@ -26,11 +26,11 @@ export const META: Record<Lang, { title: string; description: string }> = {
   en: {
     title: "Alpha Roofing & Gutters | Central Illinois Roofing, Gutters & Siding",
     description:
-      "Licensed Central Illinois roofing, gutter and siding contractor. Owner on every job and free, no-pressure estimates.",
+      "Licensed Central Illinois roofing, gutter and siding contractor. Owners on every job and free, no-pressure estimates.",
   },
   es: {
     title: "Alpha Roofing & Gutters | Techos, Canales y Siding en el Centro de Illinois",
     description:
-      "Contratista con licencia de techos, canales y siding en el centro de Illinois. El dueño en cada obra y estimados gratis, sin presión.",
+      "Contratista con licencia de techos, canales y siding en el centro de Illinois. Los dueños en cada obra y estimados gratis, sin presión.",
   },
 };

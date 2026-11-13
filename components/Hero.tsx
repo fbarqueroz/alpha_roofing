@@ -3,8 +3,7 @@
 import { useRef } from "react";
 import type { MouseEvent } from "react";
 import { motion, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
-import { ChevronRight, MapPin, Phone } from "lucide-react";
-import { BRAND } from "@/lib/content";
+import { ChevronRight, MapPin } from "lucide-react";
 import { useLang } from "./LangProvider";
 import { RooflineMark } from "./Brand";
 import { EASE, SplitWords, scrollToId } from "./Motion";
@@ -84,9 +83,6 @@ export function Hero() {
             }}
           >
             {t.nav.cta} <ChevronRight size={16} />
-          </a>
-          <a className="btn btn--ghost btn--lg" href={`tel:${BRAND.phoneHref}`}>
-            <Phone size={15} /> {BRAND.phone}
           </a>
         </motion.div>
 
